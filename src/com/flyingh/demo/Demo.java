@@ -1,14 +1,41 @@
 package com.flyingh.demo;
 
 import java.text.DateFormat;
+import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 import org.junit.Test;
 
 public class Demo {
+	@Test
+	public void test11() {
+		ResourceBundle bundle = ResourceBundle.getBundle(
+				"com.flyingh.resources.MessageResource", Locale.CHINA);
+		String info = bundle.getString("info");
+		System.out.println(new MessageFormat(info, Locale.FRANCE)
+				.format(new Object[] { new Date(), 10, 0.99 }));
+	}
+
+	@Test
+	public void test10() {
+		MessageFormat messageFormat = new MessageFormat(
+				"...{0,time,short}...{0,date}...{1,number,currency}...{2,number,percent}",
+				Locale.FRANCE);
+		System.out.println(messageFormat.format(new Object[] { new Date(), 10,
+				0.99 }));
+
+	}
+
+	@Test
+	public void test9() {
+		System.out.println(MessageFormat.format("...{0}....{1}...{2}",
+				new Date(), 10, 99999));
+	}
+
 	@Test
 	public void test8() {
 		System.out.println(NumberFormat.getPercentInstance(Locale.CHINA)
